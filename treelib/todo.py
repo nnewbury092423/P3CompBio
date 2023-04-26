@@ -21,7 +21,7 @@ def compute_diameter(T): # TODO: COMPLETE THIS FUNCTION
     :param tree: the tree
     :return: a list P containing the diameter path and a floating point number d showing the diameter length
     '''
-    P = []
+    P = [1]
     d = 0.0
     
     for node in tree.traverse_postorder():
