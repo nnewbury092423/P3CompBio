@@ -9,7 +9,7 @@ if __name__=="__main__":
     '''
     if len(argv) != 3:
         print("USAGE: %s <newick_tree> <output_file>" % argv[0]); exit(1)
-    
+    import pdb; pdb.set_trace()
     tree = read_tree_newick(argv[1])
     outfile = argv[2]
     E,F,H = euler_tour(tree)

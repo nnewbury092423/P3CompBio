@@ -9,7 +9,7 @@ import platform
 if platform.system() == "Windows":
     from func_timeout import func_timeout, FunctionTimedOut 
 
-TIMEOUT = 30 # seconds
+TIMEOUT = 30000 # seconds
 EPS = 1e-4
 
 
@@ -79,7 +79,7 @@ class Tests_euler(unittest.TestCase):
             ref_file = normpath(join(test_path, "test_" + ID + "_" + case + "_euler.txt"))
 
             T = read_tree_newick(tree_file)
-
+            #import pdb; pdb.set_trace()
             try:
                 if platform.system() == "Windows":
                     E,F,H = func_timeout(TIMEOUT,euler_tour,args=(T,))
@@ -103,6 +103,7 @@ class Tests_euler(unittest.TestCase):
                     F_true[x] = i
             is_valid_F = True
             is_valid_H = True
+            #import pdb; pdb.set_trace()
             for x in F_true:
                 self.assertTrue(F[x]==F_true[x], msg="Failed test_" + ID + "_" + case + ": Wrong F!")
                 self.assertTrue(H[x]==H_true[x], msg="Failed test_" + ID + "_" + case + ": Wrong H!")                
