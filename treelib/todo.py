@@ -109,7 +109,7 @@ def compute_diameter(T): # TODO: COMPLETE THIS FUNCTION
             # this path is also recorded
             paths[biurn.get_label()].append(biurn.get_label())
             paths[node.get_label()] = paths[biurn.get_label()]
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     return P,d
 
 def find_LCAs(T,Q):
