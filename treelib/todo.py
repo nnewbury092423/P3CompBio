@@ -59,13 +59,70 @@ def compute_diameter(T): # TODO: COMPLETE THIS FUNCTION
     :param tree: the tree
     :return: a list P containing the diameter path and a floating point number d showing the diameter length
     '''
-    P = []
-    d = 0.0
-    
-    for node in tree.traverse_postorder():
-        # TODO: REPLACE WITH YOUR CODE!
-        raise Exception("NOT IMPLEMENTED ERROR!")
+    #import pdb; pdb.set_trace()
 
+    P = []
+    distrec = {}
+    paths = {}
+    d = 0.0
+    #dists= [0]
+   
+    # post order moves 
+    # only one for loop - for each node
+    for node in T.traverse_postorder():
+        if node.is_root():
+            #children = node.child_nodes()
+            dists =[]
+            biurn  = []
+            for children in node.child_nodes():
+                dists.append(distrec[children] +  children.edge_length)
+                #import pdb; pdb.set_trace()
+                biurn.append(children)
+            #import pdb; pdb.set_trace()
+            indices = sorted(range(len(dists)),key=lambda index: dists[index])
+            #sorted(dists) 
+            #import pdb; pdb.set_trace()
+            d = dists[indices[-1]] + dists[indices[-2]]
+            front = paths[biurn[indices[-1]].get_label()]
+            n1 = biurn[indices[-1]].get_label() 
+            r = node.get_label() 
+            n2 = biurn[indices[-2]].get_label()
+            middle = [n1, r, n2]
+            back =paths[biurn[indices[-2]].get_label()]
+            P = front + middle +back[::-1] 
+            #import pdb; pdb.set_trace()
+
+            break
+
+            #import pdb; pdb.set_trace()
+        if node.is_leaf():
+            distrec[node]  = 0
+            paths[node.get_label()] = [] 
+        else:
+            # d is nodes
+            # for each d[c] add the edge length
+            # in the node make sorted list o each children
+            best =0
+            biurn  = {}
+            for children in node.child_nodes():
+                # node length insident to this node
+                #import pdb; pdb.set_trace()
+                if best <= distrec[children] +  children.edge_length:
+                    best = distrec[children] +  children.edge_length
+                    biurn = children
+               # each has longest distance to their children
+            distrec[node] = best
+            #import pdb; pdb.set_trace()
+            paths[biurn.get_label()].append(biurn.get_label())
+            paths[node.get_label()] = paths[biurn.get_label()]
+            #dists = sorted([d[c] + c.edge_length for c in node.children])
+            #d[node] = dists[-1]
+            #P = add to path
+        # TODO: REPLACE WITH YOUR CODE!
+        #raise Exception("NOT IMPLEMENTED ERROR!")
+
+
+    import pdb; pdb.set_trace()
     return P,d
 
 def find_LCAs(T,Q):
