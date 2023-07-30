@@ -9,7 +9,7 @@ import platform
 if platform.system() == "Windows":
     from func_timeout import func_timeout, FunctionTimedOut 
 
-TIMEOUT = 3000 # seconds
+TIMEOUT = 30 # seconds
 EPS = 1e-4
 
 
